@@ -6,6 +6,13 @@ typedef struct{
 	unsigned char CodeType;
 }fontheader;
 
+/*
+//ã‚¤ãƒ³ãƒ—ãƒƒãƒˆã—ãŸãƒ•ã‚©ãƒ³ãƒˆã®ãƒ˜ãƒƒãƒ€æƒ…å ±ã‚’fontheader fh ã§å—ã‘å–ã‚‹ã€‚å†…å®¹ã‚’èª­ã¿è¾¼ã‚“ã§ãƒ•ã‚©ãƒ³ãƒˆãƒã‚¤ãƒ³ã‚¿ã‚’ä½œæˆã™ã‚‹é–¢æ•°
+//unsigned char **p = mainã§å®£è¨€ã—ãŸãƒ•ã‚©ãƒ³ãƒˆã®ãƒã‚¤ãƒ³ã‚¿ã®ãƒã‚¤ãƒ³ã‚¿
+//unsigned char **p = ãƒã‚¤ãƒ³ã‚¿ã®åˆæœŸä½ç½®ã‚’è¨˜éŒ²ã™ã‚‹
+//int *fx = èª¬æ˜ã‚€ãšã„ã‘ã©ãƒ•ã‚©ãƒ³ãƒˆãƒ•ã‚¡ã‚¤ãƒ«ã®xè»¸ã®å€ç‡
+//return fontheder = ã‚ã¨ã§ã„ã£ã±ã„ä½¿ã†ã‘ã©ï¼Œå¿…è¦ãªã®ã¯fhã®X,Yã‚µã‚¤ã‚ºãªã®ã§æœ¬å½“ã¯åˆ¥ã«ã„ã‚‰ãªã„ã‘ã©ä¾¿åˆ©ã ã‹ã‚‰è¿”ã™
+*/
 fontheader CreateFontPointer(unsigned char **p,unsigned char **p0,int *fx){
 	fontheader fh;
 	for(int i=0;i<6;i++){
@@ -18,8 +25,8 @@ fontheader CreateFontPointer(unsigned char **p,unsigned char **p0,int *fx){
 	fh.Xsize = getchar();
 	fh.Ysize = getchar();
 	fh.CodeType = getchar();
-	*fx = fh.Xsize / 8;//x‚ğŠ„‚é8‚·‚éCfh.Xsize‚ª8ˆÈã15ˆÈ‰º‚È‚çx‚Í•K‚¸1(intŒ^‚Å¬”“_‚ÍØ‚èÌ‚Ä)
-	if(fh.Xsize % 8){//fh.Xsize%8‚Å—]‚è‚ğ‹‚ß‚é‚ ‚Ü‚è‚ª1ˆÈã‚È‚çx‚ğƒCƒ“ƒNƒŠƒƒ“ƒg
+	*fx = fh.Xsize / 8;//xã‚’å‰²ã‚‹8ã™ã‚‹ï¼Œfh.XsizeãŒ8ä»¥ä¸Š15ä»¥ä¸‹ãªã‚‰xã¯å¿…ãš1(intå‹ã§å°æ•°ç‚¹ã¯åˆ‡ã‚Šæ¨ã¦)
+	if(fh.Xsize % 8){//fh.Xsize%8ã§ä½™ã‚Šã‚’æ±‚ã‚ã‚‹ã‚ã¾ã‚ŠãŒ1ä»¥ä¸Šãªã‚‰xã‚’ã‚¤ãƒ³ã‚¯ãƒªãƒ¡ãƒ³ãƒˆ
 		(*fx++);
 	}
 	*p = (unsigned char *)malloc(256*(*fx)*fh.Ysize);
@@ -29,27 +36,31 @@ fontheader CreateFontPointer(unsigned char **p,unsigned char **p0,int *fx){
 
 	return fh;
 }
+
+/*bitmapã®ãƒã‚¤ãƒ³ã‚¿ãƒ¼ä½œã‚‹
+//èª¬æ˜ã‚ã‚“ã©ãã•ã„
+*/
 void CreateBitmapPointer(char fpath[],RGBarray **bmp,BITMAPFILEHEADER *bfh,BITMAPINFOHEADER *bih){
 
 	FILE *ifp;
-	ifp = fopen(fpath,"r");//Œ³‚Æ‚È‚ébmpƒtƒ@ƒCƒ‹‚ğƒŠ[ƒhƒ‚[ƒh‚Å“Ç‚İ‚İ
-	//fread(Ši”[æ‚Ìƒoƒbƒtƒ@,“Ç‚İ‚Şƒf[ƒ^ˆê‚Â‚ÌƒoƒCƒg”,“Ç‚İ‚Şƒf[ƒ^‚ÌŒÂ”,ƒtƒ@ƒCƒ‹ƒ|ƒCƒ“ƒ^)
-	//ã‚Ìs‚Å“Ç‚İ‚ñ‚¾bmpƒtƒ@ƒCƒ‹‚©‚çƒtƒ@ƒCƒ‹ƒwƒbƒ_•”•ª‚Æî•ñƒwƒbƒ_•”•ª(ÀÛ‚ÌRGB•”•ª)‚ğƒoƒbƒtƒ@‚ÉŠi”[‚·‚éƒCƒ[ƒW
+	ifp = fopen(fpath,"r");//å…ƒã¨ãªã‚‹bmpãƒ•ã‚¡ã‚¤ãƒ«ã‚’ãƒªãƒ¼ãƒ‰ãƒ¢ãƒ¼ãƒ‰ã§èª­ã¿è¾¼ã¿
 	
-	
+	//fread(æ ¼ç´å…ˆã®ãƒãƒƒãƒ•ã‚¡,èª­ã¿è¾¼ã‚€ãƒ‡ãƒ¼ã‚¿ä¸€ã¤ã®ãƒã‚¤ãƒˆæ•°,èª­ã¿è¾¼ã‚€ãƒ‡ãƒ¼ã‚¿ã®å€‹æ•°,ãƒ•ã‚¡ã‚¤ãƒ«ãƒã‚¤ãƒ³ã‚¿)
+	//ä¸Šã®è¡Œã§èª­ã¿è¾¼ã‚“ã bmpãƒ•ã‚¡ã‚¤ãƒ«ã‹ã‚‰ãƒ•ã‚¡ã‚¤ãƒ«ãƒ˜ãƒƒãƒ€éƒ¨åˆ†ã¨æƒ…å ±ãƒ˜ãƒƒãƒ€éƒ¨åˆ†(å®Ÿéš›ã®RGBéƒ¨åˆ†)ã‚’ãƒãƒƒãƒ•ã‚¡ã«æ ¼ç´ã™ã‚‹ã‚¤ãƒ¡ãƒ¼ã‚¸
 	fread(bfh,sizeof(BITMAPFILEHEADER),1,ifp);
 	fread(bih,sizeof(BITMAPINFOHEADER),1,ifp);
 	
-	*bmp = calloc(bih->biWidth*bih->biHeight,sizeof(RGBarray));//bmpƒtƒ@ƒCƒ‹—ÌˆæŠm•Û
+	*bmp = calloc(bih->biWidth*bih->biHeight,sizeof(RGBarray));//bmpãƒ•ã‚¡ã‚¤ãƒ«é ˜åŸŸç¢ºä¿
 	if(bmp==NULL){
-		printf("—ÌˆæŠm•Û¸”s\n");
+		printf("é ˜åŸŸç¢ºä¿å¤±æ•—\n");
 		exit(EXIT_FAILURE);
 	}
 
-	fread(*bmp,sizeof(RGBarray),bih->biWidth*bih->biHeight,ifp);//RGBarray‚ğ1’PˆÊ‚Æ‚µ‚Äbmpƒtƒ@ƒCƒ‹‚Ì‚‚³*‰¡•ª‚ğŠm•Û‚·‚é,‚±‚Ìbmp‚ªÀÛ‚É‘€ì‚·‚é•”•ª
+	fread(*bmp,sizeof(RGBarray),bih->biWidth*bih->biHeight,ifp);//RGBarrayã‚’1å˜ä½ã¨ã—ã¦bmpãƒ•ã‚¡ã‚¤ãƒ«ã®é«˜ã•*æ¨ªåˆ†ã‚’ç¢ºä¿ã™ã‚‹,ã“ã®bmpãŒå®Ÿéš›ã«æ“ä½œã™ã‚‹éƒ¨åˆ†
 
 	fclose(ifp);
 }
+
 void CreateOrgFontArray(unsigned char *FontOrgBox,unsigned char *p1,fontheader fh){
 		for(int k=0;k<fh.Ysize;k++){
 			FontOrgBox[k] = *p1++;
@@ -58,9 +69,9 @@ void CreateOrgFontArray(unsigned char *FontOrgBox,unsigned char *p1,fontheader f
 			unsigned int mask = 0x80;
 			for(int l=0;l<fh.Xsize;l++){
 				if(mask & FontOrgBox[k]){
-					printf("¡");
+					printf("â– ");
 				}else{
-					printf(" ");
+					printf("â–¡");
 				}
 				mask = mask >> 1;
 			}
@@ -70,7 +81,7 @@ void CreateOrgFontArray(unsigned char *FontOrgBox,unsigned char *p1,fontheader f
 }
 void ShapeBitmapData_Output(char filepath[],FILE **ofp,BITMAPFILEHEADER *bfh,BITMAPINFOHEADER *bih){
 	
-	*ofp = fopen(filepath,"w");//ƒAƒEƒgƒvƒbƒgƒtƒ@ƒCƒ‹–¼
+	*ofp = fopen(filepath,"w");//ã‚¢ã‚¦ãƒˆãƒ—ãƒƒãƒˆãƒ•ã‚¡ã‚¤ãƒ«å
 	fwrite(bfh,sizeof(BITMAPFILEHEADER),1,*ofp);
 	fwrite(bih,sizeof(BITMAPINFOHEADER),1,*ofp);
 	fseek(*ofp,bfh->bfOffBits,SEEK_SET);
@@ -88,9 +99,9 @@ void EditBmp(int *Bmp_sp_x,int Bmp_sp_y,int fhX,int fhY,BITMAPINFOHEADER *bih,un
 				(*bmp + edit_x + edit_y * bih->biWidth)-> rgbBGR[0] = 0;
 				(*bmp + edit_x + edit_y * bih->biWidth)-> rgbBGR[1] = 0;
 				(*bmp + edit_x + edit_y * bih->biWidth)-> rgbBGR[2] = 0xff;
-				printf("¡");
+				printf("â– ");
 			}else{
-				printf(" ");
+				printf("â–¡");
 			}
 			mask = mask >> 1;
 		}
