@@ -38,3 +38,4 @@ typedef struct {
 
 
 #endif	//__BMP_H__
+
