@@ -65,7 +65,7 @@ int main(int argc,char *argv[])
 
 	}
 
-	fwrite(bmp,sizeof(RGBarray),bih.biWidth*bih.biHeight,ofp);
+	fwrite(bmp,sizeof(RGBarray),bih.biWidth*bih.biHeight,ofp);//ファイル書き込み
 	fclose(ofp);
 	free(bmp);
 	return 0;
