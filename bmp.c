@@ -9,36 +9,36 @@ int main(int argc,char *argv[])
 {
 
 	if(argc!=7){
-			printf("Usage:%s “ü—Íƒtƒ@ƒCƒ‹–¼ o—Íƒtƒ@ƒCƒ‹–¼ XÀ•W YÀ•W “ü—Í‚·‚é•¶š ”{—¦ < ƒtƒHƒ“ƒgƒtƒ@ƒCƒ‹–¼\n",argv[0]);
+			printf("Usage:%s å…¥åŠ›ãƒ•ã‚¡ã‚¤ãƒ«å å‡ºåŠ›ãƒ•ã‚¡ã‚¤ãƒ«å Xåº§æ¨™ Yåº§æ¨™ å…¥åŠ›ã™ã‚‹æ–‡å­— å€ç‡ < ãƒ•ã‚©ãƒ³ãƒˆãƒ•ã‚¡ã‚¤ãƒ«å\n",argv[0]);
 			exit(EXIT_FAILURE);
 	}
 	
-	/*ƒtƒHƒ“ƒg“Ç‚İ‚İ*/
-	fontheader fh;//ƒtƒHƒ“ƒgƒwƒbƒ_
-	unsigned char *p,*p0,*p1;//ƒtƒHƒ“ƒgƒ|ƒCƒ“ƒ^,p=ƒtƒHƒ“ƒg‚Ìƒ{ƒfƒB•”•ª‚Ì“Ç‚İ‚İ—p,p0=ƒtƒHƒ“ƒgƒ{ƒfƒB•”•ª‚Ìˆê”Ô‰‚ß‚ğ‹L˜^‚·‚é—p
-	int fx;//ƒtƒHƒ“ƒgƒtƒ@ƒCƒ‹‚Ìx²(‰¡•)”{—¦	
+	/*ãƒ•ã‚©ãƒ³ãƒˆèª­ã¿è¾¼ã¿*/
+	fontheader fh;//ãƒ•ã‚©ãƒ³ãƒˆãƒ˜ãƒƒãƒ€
+	unsigned char *p,*p0,*p1;//ãƒ•ã‚©ãƒ³ãƒˆãƒã‚¤ãƒ³ã‚¿,p=ãƒ•ã‚©ãƒ³ãƒˆã®ãƒœãƒ‡ã‚£éƒ¨åˆ†ã®èª­ã¿è¾¼ã¿ç”¨,p0=ãƒ•ã‚©ãƒ³ãƒˆãƒœãƒ‡ã‚£éƒ¨åˆ†ã®ä¸€ç•ªåˆã‚ã‚’è¨˜éŒ²ã™ã‚‹ç”¨
+	int fx;//ãƒ•ã‚©ãƒ³ãƒˆãƒ•ã‚¡ã‚¤ãƒ«ã®xè»¸(æ¨ªå¹…)å€ç‡	
 	
-	fh = CreateFontPointer(&p,&p0,&fx);//getchar()g—p‚Ì‚½‚ß•K‚¸Å‰‚ÉÀs
+	fh = CreateFontPointer(&p,&p0,&fx);//getchar()ä½¿ç”¨ã®ãŸã‚å¿…ãšæœ€åˆã«å®Ÿè¡Œ
 	
-	p0 = p;//ŠÖ”‰»‚Å‚«‚È‚¢•‚¯‚Ä
-	for(int j=0;j<256;j++){//ƒtƒ@ƒCƒ‹‚Ìƒ{ƒfƒB‚ğp‚Å“Ç‚İ‚ñ‚Å‚¨‚­
+	p0 = p;//é–¢æ•°åŒ–ã§ããªã„åŠ©ã‘ã¦
+	for(int j=0;j<256;j++){//ãƒ•ã‚¡ã‚¤ãƒ«ã®ãƒœãƒ‡ã‚£ã‚’pã§èª­ã¿è¾¼ã‚“ã§ãŠã
 		for(int k=0;k<fx*fh.Ysize;k++){
 			*p++ = (unsigned char)getchar();
 		}
 	}
 
 	
-	RGBarray *bmp;//bmp‚Å’¼Ú‘€ì‚·‚é•”•ª‚Ìƒoƒbƒtƒ@
-	BITMAPFILEHEADER bfh;//bmp‚Ìƒwƒbƒ_•”•ª
-	BITMAPINFOHEADER bih;//bmp‚Ìî•ñ•”•ª
-	char ibmpfilepath[64];//ƒCƒ“ƒvƒbƒgƒtƒ@ƒCƒ‹–¼‚Æ‚¢‚¤‚©ƒtƒ@ƒCƒ‹ƒpƒX‚Æ‚¢‚¤‚©‰Æ“à‚Æ‚¢‚¤‚©‰œ‚³‚ñ‚È‚ñ‚Å‚·‚¯‚Ç
-	strncpy(ibmpfilepath, argv[1], sizeof(ibmpfilepath));//ƒCƒ“ƒvƒbƒgƒtƒ@ƒCƒ‹–¼‚ğÀsˆø”‚©‚çibmpfilepath‚ÉŠi”[
-	CreateBitmapPointer(ibmpfilepath,&bmp,&bfh,&bih);//bmpƒtƒ@ƒCƒ‹‚ğ’¼Ú‘€ì‚·‚é•”•ª‚Ìƒ|ƒCƒ“ƒ^ì¬
+	RGBarray *bmp;//bmpã§ç›´æ¥æ“ä½œã™ã‚‹éƒ¨åˆ†ã®ãƒãƒƒãƒ•ã‚¡
+	BITMAPFILEHEADER bfh;//bmpã®ãƒ˜ãƒƒãƒ€éƒ¨åˆ†
+	BITMAPINFOHEADER bih;//bmpã®æƒ…å ±éƒ¨åˆ†
+	char ibmpfilepath[64];//ã‚¤ãƒ³ãƒ—ãƒƒãƒˆãƒ•ã‚¡ã‚¤ãƒ«åã¨ã„ã†ã‹ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹ã¨ã„ã†ã‹å®¶å†…ã¨ã„ã†ã‹å¥¥ã•ã‚“ãªã‚“ã§ã™ã‘ã©
+	strncpy(ibmpfilepath, argv[1], sizeof(ibmpfilepath));//ã‚¤ãƒ³ãƒ—ãƒƒãƒˆãƒ•ã‚¡ã‚¤ãƒ«åã‚’å®Ÿè¡Œå¼•æ•°ã‹ã‚‰ibmpfilepathã«æ ¼ç´
+	CreateBitmapPointer(ibmpfilepath,&bmp,&bfh,&bih);//bmpãƒ•ã‚¡ã‚¤ãƒ«ã‚’ç›´æ¥æ“ä½œã™ã‚‹éƒ¨åˆ†ã®ãƒã‚¤ãƒ³ã‚¿ä½œæˆ
 
 	FILE *ofp;	
 	char obmpfilepath[64];
-	strncpy(obmpfilepath, argv[2], sizeof(obmpfilepath));//ƒAƒEƒgƒvƒbƒgƒtƒ@ƒCƒ‹–¼‚ğÀsˆø”‚©‚çobmpfilepath‚ÉŠi”[
-	ShapeBitmapData_Output(obmpfilepath,&ofp,&bfh,&bih);//o—Í—p‚Ìbmp‚ğŒ`¬‚µ‚Ä‚¨‚­
+	strncpy(obmpfilepath, argv[2], sizeof(obmpfilepath));//ã‚¢ã‚¦ãƒˆãƒ—ãƒƒãƒˆãƒ•ã‚¡ã‚¤ãƒ«åã‚’å®Ÿè¡Œå¼•æ•°ã‹ã‚‰obmpfilepathã«æ ¼ç´
+	ShapeBitmapData_Output(obmpfilepath,&ofp,&bfh,&bih);//å‡ºåŠ›ç”¨ã®bmpã‚’å½¢æˆã—ã¦ãŠã
 
 	
 	
@@ -46,22 +46,22 @@ int main(int argc,char *argv[])
 	int Bmp_sp_x = atoi(argv[3]);//bitmap steart point x
 	int Bmp_sp_y = atoi(argv[4]);//bitmap steart point y
 	int Font_Scale = atoi(argv[6]);
-	char StrBuf[strlen(argv[5]) + 1]; // +1 ‚ÍI’[•¶š—p‚Ì—Ìˆæ‚ğŠm•Û‚·‚é‚½‚ß‚Å‚·
-	strncpy(StrBuf, argv[5], sizeof(StrBuf) - 1); // I’[•¶š‚Ì•ª‚ğœ‚¢‚ÄƒRƒs[
-	StrBuf[sizeof(StrBuf) - 1] = '\0'; // I’[•¶š‚ğè“®‚Å’Ç‰Á
+	char StrBuf[strlen(argv[5]) + 1]; // +1 ã¯çµ‚ç«¯æ–‡å­—ç”¨ã®é ˜åŸŸã‚’ç¢ºä¿ã™ã‚‹ãŸã‚ã§ã™
+	strncpy(StrBuf, argv[5], sizeof(StrBuf) - 1); // çµ‚ç«¯æ–‡å­—ã®åˆ†ã‚’é™¤ã„ã¦ã‚³ãƒ”ãƒ¼
+	StrBuf[sizeof(StrBuf) - 1] = '\0'; // çµ‚ç«¯æ–‡å­—ã‚’æ‰‹å‹•ã§è¿½åŠ 
 	
-	for(int j = 0; j < strlen(StrBuf);j++){
-		p=p0;
-		char c = StrBuf[j];
-		for(int j=0;j<c;j++){		
+	for(int j = 0; j < strlen(StrBuf);j++){//å…¥åŠ›ã•ã‚ŒãŸæ–‡å­—æ•°å›for
+		p=p0;//pã‚’åˆæœŸä½ç½®ã«æˆ»ã™
+		char c = StrBuf[j];//æ–‡å­—åˆ—ã‹ã‚‰ä¸€æ–‡å­—å–ã‚Šå‡ºã™ï¼Œä¸€æ–‡å­—ãšã¤å‡¦ç†ã™ã‚‹ãŸã‚
+		for(int j=0;j<c;j++){//å–ã‚Šå‡ºã—ãŸæ–‡å­—ã®å ´æ‰€ã¾ã§pã‚’ç§»å‹•
 			for(int k=0;k<fx*fh.Ysize;k++){
 				p++;
 			}
 		}
-		p1 = p;
-		unsigned char FontOrgBox[fh.Ysize];
-		CreateOrgFontArray(FontOrgBox,p1,fh);
-		EditBmp(&Bmp_sp_x,Bmp_sp_y,(int)fh.Xsize,(int)fh.Ysize,&bih,FontOrgBox,&bmp);
+		p1 = p;//p1ã¯ä½œæ¥­ç”¨ãƒã‚¤ãƒ³ã‚¿
+		unsigned char FontOrgBox[fh.Ysize];//ä¸€æ–‡å­—åˆ†ã®pã®å€¤ã‚’æ ¼ç´ã™ã‚‹ãƒãƒƒãƒ•ã‚¡,pã¨åŒã˜å‹ã§å®£è¨€
+		CreateOrgFontArray(FontOrgBox,p1,fh);//ãƒãƒƒãƒ•ã‚¡ã«pã‚’æ ¼ç´ã™ã‚‹,pã¯æ“ä½œã—ã«ãã„+é–¢æ•°åŒ–ã™ã‚‹ãŸã‚
+		EditBmp(&Bmp_sp_x,Bmp_sp_y,(int)fh.Xsize,(int)fh.Ysize,&bih,FontOrgBox,&bmp);//bmpã‚’ç·¨é›†ã™ã‚‹
 
 	}
 
@@ -74,4 +74,4 @@ int main(int argc,char *argv[])
 
 
 //bmp.exe Balloon.bmp Balloon_A.bmp 100 100 test 1 < ILGH16XB.FNT
-//./xxxxx.c “ü—Íƒtƒ@ƒCƒ‹–¼ o—Íƒtƒ@ƒCƒ‹–¼ XÀ•W YÀ•W “ü—Í‚·‚é•¶š ”{—¦ < ƒtƒHƒ“ƒgƒtƒ@ƒCƒ‹–¼
+//./xxxxx.c å…¥åŠ›ãƒ•ã‚¡ã‚¤ãƒ«å å‡ºåŠ›ãƒ•ã‚¡ã‚¤ãƒ«å Xåº§æ¨™ Yåº§æ¨™ å…¥åŠ›ã™ã‚‹æ–‡å­— å€ç‡ < ãƒ•ã‚©ãƒ³ãƒˆãƒ•ã‚¡ã‚¤ãƒ«å
