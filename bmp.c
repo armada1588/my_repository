@@ -1,3 +1,12 @@
+/*
+//入力としてフォントファイル、ビットマップファイル、
+//およびその他の情報を受け取り、指定された文字列を指定された位置に描画するプログラム
+//倍率は未実装
+//
+//実行例
+//bmp.exe Balloon.bmp Balloon_A.bmp 100 100 test 1 < ILGH16XB.FNT
+//./xxxxx.c 入力ファイル名 出力ファイル名 X座標 Y座標 入力する文字 倍率 < フォントファイル名
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
@@ -9,8 +18,8 @@ int main(int argc,char *argv[])
 {
 
 	if(argc!=7){
-			printf("Usage:%s 入力ファイル名 出力ファイル名 X座標 Y座標 入力する文字 倍率 < フォントファイル名\n",argv[0]);
-			exit(EXIT_FAILURE);
+		printf("Usage:%s 入力ファイル名 出力ファイル名 X座標 Y座標 入力する文字 倍率 < フォントファイル名\n",argv[0]);
+		exit(EXIT_FAILURE);
 	}
 	
 	/*フォント読み込み*/
@@ -35,18 +44,18 @@ int main(int argc,char *argv[])
 	strncpy(ibmpfilepath, argv[1], sizeof(ibmpfilepath));//インプットファイル名を実行引数からibmpfilepathに格納
 	CreateBitmapPointer(ibmpfilepath,&bmp,&bfh,&bih);//bmpファイルを直接操作する部分のポインタ作成
 
-	FILE *ofp;	
-	char obmpfilepath[64];
+	FILE *ofp;//output file pointer
+	char obmpfilepath[64];//アウトプットファイルの文字列バッファ，
 	strncpy(obmpfilepath, argv[2], sizeof(obmpfilepath));//アウトプットファイル名を実行引数からobmpfilepathに格納
 	ShapeBitmapData_Output(obmpfilepath,&ofp,&bfh,&bih);//出力用のbmpを形成しておく
 
 	
 	
-	RGBQUAD rgbq;
+	RGBQUAD rgbq;//なにこれ
 	int Bmp_sp_x = atoi(argv[3]);//bitmap steart point x
 	int Bmp_sp_y = atoi(argv[4]);//bitmap steart point y
-	int Font_Scale = atoi(argv[6]);
-	char StrBuf[strlen(argv[5]) + 1]; // +1 は終端文字用の領域を確保するためです
+	int Font_Scale = atoi(argv[6]);//倍率
+	char StrBuf[strlen(argv[5]) + 1]; // +1 は終端文字用の領域を確保するため
 	strncpy(StrBuf, argv[5], sizeof(StrBuf) - 1); // 終端文字の分を除いてコピー
 	StrBuf[sizeof(StrBuf) - 1] = '\0'; // 終端文字を手動で追加
 	
@@ -73,5 +82,3 @@ int main(int argc,char *argv[])
 }
 
 
-//bmp.exe Balloon.bmp Balloon_A.bmp 100 100 test 1 < ILGH16XB.FNT
-//./xxxxx.c 入力ファイル名 出力ファイル名 X座標 Y座標 入力する文字 倍率 < フォントファイル名
